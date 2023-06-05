@@ -1,18 +1,32 @@
 DROP TABLE IF EXISTS Produce CASCADE;
 
 CREATE TABLE IF NOT EXISTS Produce(
-    pk serial unique not null PRIMARY KEY,
-    category varchar(30),
-    item varchar(30),
-    variety varchar(30),
-    unit varchar(10),
-    price float
+ pk serial UNIQUE NOT NULL PRIMARY KEY,
+    first_name VARCHAR(255),
+    second_name VARCHAR(255),
+    goals_scored INT,
+    assists INT,
+    total_points INT,
+    mins INT,
+    goals_conceded INT,
+    creativity DECIMAL(10, 2),
+    influence DECIMAL(10, 2),
+    threat DECIMAL(10, 2),
+    bonus INT,
+    bps INT,
+    ict_index DECIMAL(10, 2),
+    clean_sheets INT,
+    red_cards INT,
+    yellow_cards INT,
+    selected_by_percent DECIMAL(10, 2),
+    now_cost INT,
+    element_type INT
 );
 
 DELETE FROM Produce;
 
 CREATE INDEX IF NOT EXISTS produce_index
-ON Produce (category, item, variety);
+ON Produce (first_name, second_name);
 
 DROP TABLE IF EXISTS Sell;
 

@@ -4,17 +4,16 @@ import pandas as pd
 #from GreenGroceries import app
 
 #DATASET_PATH = os.path.join(app.root_path, 'dataset', 'fruitvegprices-2017_2022.csv')
-DATASET_PATH = 'C:/Users/welin/Downloads/GreenGroceries/GreenGroceries/GreenGroceries/dataset/fruitvegprices-2017_2022.csv'
+DATASET_PATH = 'C:/Users/welin/Downloads/DSFantasyProject/GreenGroceries/GreenGroceries/GreenGroceries/dataset/cleaned_players.csv'
 
-def get_label_name(string):
-    return string.replace("_", " ").capitalize()
 
 
 class ModelChoices:
     def __init__(self, choices_list):
         for item in choices_list:
-            setattr(self, item.lower(), get_label_name(item))
-
+            item_str = str(item)  # Convert item to string
+            item_str = item_str.replace("_", " ").capitalize()
+            setattr(self, item_str.lower(), item_str)
     def choices(self):
         return [(k, v) for k, v in self.__dict__.items()]
 
@@ -27,13 +26,10 @@ class ModelChoices:
 
 df = pd.read_csv(DATASET_PATH, sep=',')
 
-ProduceCategoryChoices = ModelChoices(df.category.unique())
-ProduceItemChoices = ModelChoices(df.item.unique())
-ProduceVarietyChoices = ModelChoices(df.variety.unique())
-ProduceUnitChoices = ModelChoices(df.unit.unique())
+ProduceCategoryChoices = ModelChoices(df.first_name)
+ProduceItemChoices = ModelChoices(df.second_name)
+ProduceVarietyChoices = ModelChoices(df.goals_scored)
+ProduceUnitChoices = ModelChoices(df.minutes)
 
 UserTypeChoices = ModelChoices(['Farmer', 'Customer'])
 
-if __name__ == '__main__':
-    print(df.item.unique())
-    print(ProduceItemChoices.choices())
