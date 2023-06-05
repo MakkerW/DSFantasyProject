@@ -1,5 +1,6 @@
 .home {
     margin-top: var(--margin-lg);
+    margin-bottom: 500  px;
 }
 
 .home__hero {
