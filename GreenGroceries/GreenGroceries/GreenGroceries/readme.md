@@ -17,7 +17,10 @@ access for the TAs):
 
 When all this information is present (and correct) the server can be started with:
 
-    flask run
+    set FLASK_APP=app.py
+
+    python -m flask run
+
 
 ## Folder setup 📁
 
