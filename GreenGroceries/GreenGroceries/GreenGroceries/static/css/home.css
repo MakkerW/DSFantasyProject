@@ -1,6 +1,7 @@
-.home {
+body {
     margin-top: var(--margin-lg);
     margin-bottom: 500px;
+    background: linear-gradient(to bottom, rgb(115, 201, 230), white);
 }
 
 .home__hero {

@@ -39,7 +39,7 @@ select::after {
 }
 
 input[disabled], select[disabled] {
-    background-color: var(--gray-light);
+    background-color: var(--blue-light);
 }
 
 .form--row {

@@ -63,7 +63,7 @@ a, a:visited, a:focus, a:active {
 .btn span {
     display: flex;
     gap: var(--margin-sm);
-    color: var(--white);
+    color: var(--black);
     align-items: center;
 }
 

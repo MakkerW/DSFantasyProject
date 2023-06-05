@@ -9,11 +9,11 @@
     --gray-light: rgba(17, 24, 8, .1);
     --white: #F5F5F5;
 
-    --green: #4A9655;
+    --green: #00ff85;
     --red: #CB1C01;
     --copper: #B37E42;
 
-    --green-dark: #366D3F;
+    --blue-light: #64c4dc;
     --copper-dark: #77542C;
 
     --filter-green: invert(47%) sepia(27%) saturate(776%) hue-rotate(77deg) brightness(102%) contrast(88%);
