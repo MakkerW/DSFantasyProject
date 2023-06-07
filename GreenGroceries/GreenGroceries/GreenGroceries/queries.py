@@ -101,14 +101,7 @@ def get_produce_by_filters(first_name=None, second_name=None, goals_scored=None,
     if second_name:
         conditionals.append(f"second_name='{second_name}'")
     if goals_scored:
-        conditionals.append(f"goals_scored = '{goals_scored}'")
-    if farmer_pk:
-        conditionals.append(f"farmer_pk = '{farmer_pk}'")
-    if farmer_name:
-        conditionals.append(f"farmer_name LIKE '%{farmer_name}%'")
-    if price:
-        conditionals.append(f"price <= {price}")
-
+        conditionals.append(f"goals_scored = {goals_scored}")
     args_str = ' AND '.join(conditionals)
     order = " ORDER BY first_name"
     db_cursor.execute(sql + args_str + order)

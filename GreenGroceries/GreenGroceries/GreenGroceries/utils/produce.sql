@@ -57,11 +57,6 @@ DELETE FROM ProduceOrder;
 CREATE OR REPLACE VIEW vw_produce
 AS
 SELECT p.first_name, p.second_name, p.goals_scored,
-       p.assists, s.available,
-       p.pk as produce_pk,
-       f.full_name as farmer_name,
-       f.pk as farmer_pk
+       p.assists
 FROM Produce p
-JOIN Sell s ON s.produce_pk = p.pk
-JOIN Farmers f ON s.farmer_pk = f.pk
-ORDER BY available, p.pk;
+ORDER BY p.first_name;

@@ -16,11 +16,10 @@ def produce():
     title = 'Our produce!'
     produce = []
     if request.method == 'POST':
-        produce = get_produce_by_filters(first_name=request.form.get('first_name'),
-                                         second_name=request.form.get('second_name'),
-                                         goals_scored=request.form.get('goals_scored'),
-                                         farmer_name=request.form.get('sold_by'),
-                                         price=request.form.get('price'))
+        produce = get_produce_by_filters(first_name=request.form.get('first_name'.capitalize()),
+                                         second_name=request.form.get('second_name'.capitalize()),
+                                         goals_scored=request.form.get('goals_scored'.capitalize())
+                                         )
         title = f'Our {request.form.get("first_name")}!'
     return render_template('pages/produce.html', produce=produce, form=form, title=title)
 
