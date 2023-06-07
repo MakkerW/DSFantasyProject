@@ -50,14 +50,14 @@
         <div class="form--row">
             {% if sold_by %}
                 <div class="form-group">
-                    {{ form.sold_by.label }}
-                    {{ form.sold_by }}
+                    {{ form.assists.label }}
+                    {{ form.assists }}
                 </div>
             {% endif %}
 
             <div class="form-group">
-                {{ form.price.label }}
-                {{ form.price }}
+                {{ form.total_points.label }}
+                {{ form.total_points }}
             </div>
 
             {{ form.submit(class="btn") }}
@@ -70,16 +70,12 @@
 {% macro produce_card (product=None, show_checkout=True, show_restock=False, date=None) %}
     <div class="card">
         <div class="card__info">
-            {% if date %}
-                <p>Date: {{ date }}</p>
-            {% endif %}
             <p>First name: {{ product.first_name|format_data }}</p>
             <p>Second name: {{ product.second_name|format_data }}</p>
+            <p>FPL points: {{ product.total_points|format_data }}</p>
             <p>Goals scored: {{ product.goals_scored|format_data }}</p>
-            {% if not date %}
-                <p>In stock: {{ product.available }}</p>
-                <p>Sold by: {{ product.farmer_name }}</p>
-            {% endif %}
+            <p>Assists : {{product.assists | format_data}}</p>
+
         </div>
 
         <div class="card__action">

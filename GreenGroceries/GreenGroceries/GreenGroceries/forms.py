@@ -56,8 +56,9 @@ class UserSignupForm(FlaskForm):
 class FilterProduceForm(FlaskForm):
     first_name = StringField('First name')
     second_name = StringField('Second name')
-    goals_scored = FloatField('Goals scored')
-    sold_by = StringField('Sold by')
+    total_points = FloatField('FPL points')
+    goals_scored = FloatField('Minimum goals scored')
+    assists = FloatField('Minimum assists')
     price = FloatField('Price (lower than or equal to)',
                        validators=[NumberRange(min=0, max=100)])
 

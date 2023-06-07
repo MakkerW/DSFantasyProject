@@ -90,24 +90,33 @@ def get_farmer_by_pk(pk):
 
 
 def get_produce_by_filters(first_name=None, second_name=None, goals_scored=None,
-                           farmer_pk=None, farmer_name=None, price=None):
+                           assists=None, total_points=None, price=None):
     sql = """
     SELECT * FROM vw_produce
     WHERE
     """
+    print(assists)
     conditionals = []
-    print("FIRST NAME:",first_name)
     if first_name:
         conditionals.append(f"first_name='{first_name}'")
-    elif second_name:
+
+    if second_name:
         conditionals.append(f"second_name='{second_name}'")
-    elif goals_scored:
-        conditionals.append(f"goals_scored = {goals_scored}")
-    else:
-        db_cursor.execute("""SELECT * FROM vw_produce
-                          """)
+
+    if total_points:
+        conditionals.append(f"total_points = {total_points}")
+
+    if goals_scored:
+        conditionals.append(f"goals_scored >= {goals_scored}")
+
+    if assists:
+        conditionals.append(f"assists >= {assists}")
+
+    if not any([first_name, second_name, total_points, goals_scored, assists]):
+        db_cursor.execute("""SELECT * FROM vw_produce""")
         produce = [Produce(res) for res in db_cursor.fetchall()] if db_cursor.rowcount > 0 else []
         return produce
+
     args_str = ' AND '.join(conditionals)
     print(args_str)
     db_cursor.execute(sql+ args_str)

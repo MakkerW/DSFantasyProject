@@ -19,9 +19,12 @@ def produce():
     if request.method == 'POST':
         produce = get_produce_by_filters(first_name=request.form.get('first_name').capitalize(),
                                          second_name=request.form.get('second_name').capitalize(),
-                                         goals_scored=request.form.get('goals_scored').capitalize()
+                                         goals_scored=request.form.get('goals_scored'),
+                                         assists=request.form.get('assists'),
+                                         total_points=request.form.get('total_points')
+
                                          )
-        title = f'Our {request.form.get("first_name")}!'
+        title = 'FPL query tool'
     return render_template('pages/produce.html', produce=produce, form=form, title=title)
 
 
@@ -34,8 +37,9 @@ def add_produce():
             produce_data = dict(
                 first_name=form.first_name.data,
                 second_name=form.second_name.data,
+                total_points=form.total_points.data,
                 goals_scored=form.goals_scored.data,
-                unit=form.unit.data,
+                assists=form.assists.data,
                 price=form.price.data
             )
             produce = ProduceModel(produce_data)
