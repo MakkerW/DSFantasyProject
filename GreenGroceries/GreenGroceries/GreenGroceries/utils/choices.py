@@ -30,6 +30,5 @@ ProduceCategoryChoices = ModelChoices(df.first_name)
 ProduceItemChoices = ModelChoices(df.second_name)
 ProduceVarietyChoices = ModelChoices(df.goals_scored)
 ProduceUnitChoices = ModelChoices(df.minutes)
-
 UserTypeChoices = ModelChoices(['Farmer', 'Customer'])
 
