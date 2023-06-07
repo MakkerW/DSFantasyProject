@@ -54,12 +54,9 @@ class UserSignupForm(FlaskForm):
 
 
 class FilterProduceForm(FlaskForm):
-    first_name = SelectField('First name',
-                           choices=ProduceCategoryChoices.choices())
-    second_name = SelectField('Second name',
-                       choices=ProduceItemChoices.choices())
-    goals_scored = SelectField('Goals scored',
-                          choices=ProduceVarietyChoices.choices())
+    first_name = StringField('First name')
+    second_name = StringField('Second name')
+    goals_scored = FloatField('Goals scored')
     sold_by = StringField('Sold by')
     price = FloatField('Price (lower than or equal to)',
                        validators=[NumberRange(min=0, max=100)])

@@ -96,15 +96,21 @@ def get_produce_by_filters(first_name=None, second_name=None, goals_scored=None,
     WHERE
     """
     conditionals = []
+    print("FIRST NAME:",first_name)
     if first_name:
         conditionals.append(f"first_name='{first_name}'")
-    if second_name:
+    elif second_name:
         conditionals.append(f"second_name='{second_name}'")
-    if goals_scored:
+    elif goals_scored:
         conditionals.append(f"goals_scored = {goals_scored}")
+    else:
+        db_cursor.execute("""SELECT * FROM vw_produce
+                          """)
+        produce = [Produce(res) for res in db_cursor.fetchall()] if db_cursor.rowcount > 0 else []
+        return produce
     args_str = ' AND '.join(conditionals)
-    order = " ORDER BY first_name"
-    db_cursor.execute(sql + args_str + order)
+    print(args_str)
+    db_cursor.execute(sql+ args_str)
     produce = [Produce(res) for res in db_cursor.fetchall()] if db_cursor.rowcount > 0 else []
     return produce
 
