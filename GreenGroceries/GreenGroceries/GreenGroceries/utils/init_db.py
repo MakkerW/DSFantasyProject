@@ -24,10 +24,13 @@ if __name__ == '__main__':
         # Import all produce from the dataset
         all_produce = list(
             map(lambda x: tuple(x),
-                df[['category', 'item', 'unit', 'variety', 'price']].to_records(index=False))
+                df[['first_name','second_name','goals_scored','assists','total_points','minutes','goals_conceded','creativity','influence','threat','bonus','bps','ict_index','clean_sheets','red_cards','yellow_cards','selected_by_percent','now_cost','element_type']].to_records(index=False))
         )
-        args_str = ','.join(cur.mogrify("(%s, %s, %s, %s, %s)", i).decode('utf-8') for i in all_produce)
-        cur.execute("INSERT INTO Produce (category, item, unit, variety, price) VALUES " + args_str)
+        args_str = ','.join(
+    cur.mogrify("(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", tuple(str(x) for x in i)).decode('utf-8')
+    for i in all_produce
+)
+        cur.execute("INSERT INTO Produce (first_name,second_name,goals_scored,assists,total_points,mins,goals_conceded,creativity,influence,threat,bonus,bps,ict_index,clean_sheets,red_cards,yellow_cards,selected_by_percent,now_cost,element_type) VALUES " + args_str)
 
         # Dummy farmer 1 sells all produce
         dummy_sales = [(1, i) for i in range(1, len(all_produce) + 1)]

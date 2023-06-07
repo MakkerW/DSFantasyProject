@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS Produce(
     yellow_cards INT,
     selected_by_percent DECIMAL(10, 2),
     now_cost INT,
-    element_type INT
+    element_type VARCHAR(255)
 );
 
 DELETE FROM Produce;
@@ -56,8 +56,8 @@ DELETE FROM ProduceOrder;
 
 CREATE OR REPLACE VIEW vw_produce
 AS
-SELECT p.category, p.item, p.variety,
-       p.unit, p.price, s.available,
+SELECT p.first_name, p.second_name, p.goals_scored,
+       p.assists, s.available,
        p.pk as produce_pk,
        f.full_name as farmer_name,
        f.pk as farmer_pk
