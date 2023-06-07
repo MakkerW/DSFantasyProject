@@ -54,11 +54,11 @@ class UserSignupForm(FlaskForm):
 
 
 class FilterProduceForm(FlaskForm):
-    category = SelectField('Category',
+    first_name = SelectField('First name',
                            choices=ProduceCategoryChoices.choices())
-    item = SelectField('Item',
+    second_name = SelectField('Second name',
                        choices=ProduceItemChoices.choices())
-    variety = SelectField('Variety',
+    goals_scored = SelectField('Goals scored',
                           choices=ProduceVarietyChoices.choices())
     sold_by = StringField('Sold by')
     price = FloatField('Price (lower than or equal to)',

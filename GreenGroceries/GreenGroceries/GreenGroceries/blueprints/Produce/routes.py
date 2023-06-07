@@ -16,12 +16,12 @@ def produce():
     title = 'Our produce!'
     produce = []
     if request.method == 'POST':
-        produce = get_produce_by_filters(category=request.form.get('category'),
-                                         item=request.form.get('item'),
-                                         variety=request.form.get('variety'),
+        produce = get_produce_by_filters(first_name=request.form.get('first_name'),
+                                         second_name=request.form.get('second_name'),
+                                         goals_scored=request.form.get('goals_scored'),
                                          farmer_name=request.form.get('sold_by'),
                                          price=request.form.get('price'))
-        title = f'Our {request.form.get("category")}!'
+        title = f'Our {request.form.get("first_name")}!'
     return render_template('pages/produce.html', produce=produce, form=form, title=title)
 
 
@@ -32,9 +32,9 @@ def add_produce():
     if request.method == 'POST':
         if form.validate_on_submit():
             produce_data = dict(
-                category=form.category.data,
-                item=form.item.data,
-                variety=form.variety.data,
+                first_name=form.first_name.data,
+                second_name=form.second_name.data,
+                goals_scored=form.goals_scored.data,
                 unit=form.unit.data,
                 price=form.price.data
             )

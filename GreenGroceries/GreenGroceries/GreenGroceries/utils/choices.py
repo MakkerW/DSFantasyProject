@@ -4,7 +4,7 @@ import pandas as pd
 #from GreenGroceries import app
 
 #DATASET_PATH = os.path.join(app.root_path, 'dataset', 'fruitvegprices-2017_2022.csv')
-DATASET_PATH = "C:/Users/olive/PycharmProjects/DSmand/Main_Project_(FPL)/DSFantasyProject/GreenGroceries/GreenGroceries/GreenGroceries/dataset/cleaned_players.csv"
+DATASET_PATH = "C:/Users/welin/Downloads/DSFantasyProject/GreenGroceries/GreenGroceries/GreenGroceries/dataset/cleaned_players.csv"
 
 
 
@@ -32,5 +32,4 @@ ProduceVarietyChoices = ModelChoices(df.goals_scored)
 ProduceUnitChoices = ModelChoices(df.minutes)
 
 UserTypeChoices = ModelChoices(['Farmer', 'Customer'])
-print(df)
 

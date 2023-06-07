@@ -89,19 +89,19 @@ def get_farmer_by_pk(pk):
     return farmer
 
 
-def get_produce_by_filters(category=None, item=None, variety=None,
+def get_produce_by_filters(first_name=None, second_name=None, goals_scored=None,
                            farmer_pk=None, farmer_name=None, price=None):
     sql = """
     SELECT * FROM vw_produce
     WHERE
     """
     conditionals = []
-    if category:
-        conditionals.append(f"category='{category}'")
-    if item:
-        conditionals.append(f"item='{item}'")
-    if variety:
-        conditionals.append(f"variety = '{variety}'")
+    if first_name:
+        conditionals.append(f"first_name='{first_name}'")
+    if second_name:
+        conditionals.append(f"second_name='{second_name}'")
+    if goals_scored:
+        conditionals.append(f"goals_scored = '{goals_scored}'")
     if farmer_pk:
         conditionals.append(f"farmer_pk = '{farmer_pk}'")
     if farmer_name:
@@ -110,7 +110,7 @@ def get_produce_by_filters(category=None, item=None, variety=None,
         conditionals.append(f"price <= {price}")
 
     args_str = ' AND '.join(conditionals)
-    order = " ORDER BY price "
+    order = " ORDER BY first_name"
     db_cursor.execute(sql + args_str + order)
     produce = [Produce(res) for res in db_cursor.fetchall()] if db_cursor.rowcount > 0 else []
     return produce
