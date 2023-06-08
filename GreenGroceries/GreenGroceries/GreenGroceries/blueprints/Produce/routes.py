@@ -21,10 +21,11 @@ def produce():
                                          GW=request.form.get('GW'),
                                          goals_scored=request.form.get('goals_scored'),
                                          assists=request.form.get('assists'),
-                                         total_points=request.form.get('total_points')
+                                         total_points=request.form.get('total_points'),
+                                         team=request.form.get('team'),
+                                         position=request.form.get('position')
 
                                          )
-        print(request.form.get('GW'))
         title = 'FPL query tool'
     return render_template('pages/produce.html', produce=produce, form=form, title=title, GW=request.form.get('GW'))
 

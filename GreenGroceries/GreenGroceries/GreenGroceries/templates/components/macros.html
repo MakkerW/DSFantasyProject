@@ -48,17 +48,25 @@
         </div>
 
         <div class="form--row">
-            {% if sold_by %}
                 <div class="form-group">
                     {{ form.assists.label }}
                     {{ form.assists }}
                 </div>
-            {% endif %}
-
+                <div class="form-group">
+                    {{ form.total_points.label }}
+                    {{ form.total_points }}
+                </div>
             <div class="form-group">
-                {{ form.total_points.label }}
-                {{ form.total_points }}
+                {{ form.team.label }}
+                {{ form.team }}
             </div>
+        </div>
+        <div class="form--row">
+                <div class="form-group">
+                    {{ form.position.label }}
+                    {{ form.position }}
+                </div>
+
 
             {{ form.submit(class="btn") }}
             <a href="{{ url_for('Produce.produce') }}" class="btn">Clear filters</a>
@@ -76,6 +84,8 @@
             <p>FPL points: {{ product.total_points|format_data }}</p>
             <p>Goals scored: {{ product.goals_scored|format_data }}</p>
             <p>Assists : {{product.assists | format_data}}</p>
+            <p>Team : {{product.team | format_data}}</p>
+            <p>Position : {{product.position | format_data}}</p>
 
         </div>
 
@@ -101,6 +111,8 @@
             <p>FPL points: {{ product.all_points|format_data }}</p>
             <p>Goals scored: {{ product.total_goals|format_data }}</p>
             <p>Assists : {{product.total_assists | format_data}}</p>
+            <p>Team : {{product.team | format_data}}</p>
+            <p>Position : {{product.position | format_data}}</p>
 
         </div>
 

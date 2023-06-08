@@ -90,31 +90,34 @@ def get_farmer_by_pk(pk):
 
 
 def get_produce_by_filters(full_name=None, GW=None, goals_scored=None,
-                           assists=None, total_points=None, price=None):
+                           assists=None, total_points=None, team=None, position = None):
     sql = """
     SELECT * FROM vw_produce
     WHERE
     """
     conditionals = []
     if full_name:
-        conditionals.append(f"full_name='{full_name}'")
+        conditionals.append(f"full_name='{full_name.title()}'")
+    if team and team!='none':
+        conditionals.append(f" team ='{team.title()}'")
+    if position and position!='none':
+        conditionals.append(f"position='{position.upper()}'")    
     if GW=='none':
         sql = """
         SELECT DISTINCT * FROM vw_total_produce
         WHERE """
         if total_points:
             conditionals.append(f"all_points = {total_points}")
-
         if goals_scored:
             conditionals.append(f"total_goals >= {goals_scored}")
-
         if assists:
             conditionals.append(f"total_assists >= {assists}")
-        if not full_name and not total_points and not goals_scored and not assists:
+        if not full_name and not total_points and not goals_scored and not assists and not position and not team:
             db_cursor.execute("""SELECT DISTINCT * FROM vw_total_produce""")
             produce = [Produce(res) for res in db_cursor.fetchall()] if db_cursor.rowcount > 0 else []
             return produce
         args_str = ' AND '.join(conditionals)
+        print(args_str)
         db_cursor.execute(sql+ args_str)
         produce = [Produce(res) for res in db_cursor.fetchall()] if db_cursor.rowcount > 0 else []
         print(produce)

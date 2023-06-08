@@ -4,12 +4,22 @@ from wtforms import StringField, PasswordField, SubmitField, IntegerField, Selec
 from wtforms.validators import DataRequired, Length, ValidationError, NumberRange
 
 from GreenGroceries.queries import get_user_by_user_name, get_farmer_by_pk, get_customer_by_pk
-from GreenGroceries.utils.choices import GWChoices,PositionChoices \
+from GreenGroceries.utils.choices import GWChoices,PositionChoices, TeamChoices \
 
 Gameweeks= GWChoices.choices()
 last_element = Gameweeks[-1]  # Get the last element of the list
 rest_of_list = Gameweeks[:-1]  # Get the rest of the list excluding the last element
 GameweeksNew = [last_element] + rest_of_list
+
+Teams= TeamChoices.choices()
+last_element = Teams[-1]  # Get the last element of the list
+rest_of_list = Teams[:-1]  # Get the rest of the list excluding the last element
+Teamsnew = [last_element] + rest_of_list
+
+Teams= PositionChoices.choices()
+last_element = Teams[-1]  # Get the last element of the list
+rest_of_list = Teams[:-1]  # Get the rest of the list excluding the last element
+Positionsnew = [last_element] + rest_of_list
 class FilterProduceForm(FlaskForm):
     full_name = StringField('Name')
     GW = SelectField('Gameweek',
@@ -18,8 +28,10 @@ class FilterProduceForm(FlaskForm):
     total_points = FloatField('FPL points')
     goals_scored = FloatField('Minimum goals scored')
     assists = FloatField('Minimum assists')
-    price = FloatField('Price (lower than or equal to)',
-                       validators=[NumberRange(min=0, max=100)])
+    position = SelectField('Position',
+                           choices=Positionsnew)
+    team = SelectField('Team',
+                       choices=Teamsnew)
 
     submit = SubmitField('Filter')
 

@@ -57,14 +57,13 @@ DELETE FROM ProduceOrder;
 
 CREATE OR REPLACE VIEW vw_produce
 AS
-SELECT p.full_name,p.GW, p.total_points, p.goals_scored,
+SELECT p.full_name,p.team,p.position,p.GW, p.total_points, p.goals_scored,
        p.assists
 FROM Produce p
 ORDER BY p.total_points;
 
 CREATE OR REPLACE VIEW vw_total_produce
 AS
-SELECT p.full_name,p.all_points, p.total_goals, p.total_assists,
-       p.position
+SELECT p.full_name,p.team,p.position,p.all_points, p.total_goals, p.total_assists
 FROM Produce p
 ORDER BY p.total_points;

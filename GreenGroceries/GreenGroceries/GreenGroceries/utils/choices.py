@@ -30,10 +30,14 @@ class ModelChoices:
 df = pd.read_csv(DATASET_PATH, sep=',')
 df.dropna(subset=['GW'], inplace=True)
 df['GW'] = df['GW'].astype(int)
+df['team'] = df['team'].replace("Nott'm Forest", "Nottingham Forest")
 df['total_goals'] = df.groupby('name')['goals_scored'].transform('sum')
 df['all_points'] = df.groupby('name')['total_points'].transform('sum')
 df['total_assists'] = df.groupby('name')['assists'].transform('sum')
+
 GWChoices = ModelChoices(df.GW)
 PositionChoices = ModelChoices(df.position)
+TeamChoices = ModelChoices(df.team)
+
 UserTypeChoices = ModelChoices(['Farmer', 'Customer'])
 
