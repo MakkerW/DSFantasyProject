@@ -18,7 +18,7 @@
     <div class="produce">
         {% if produce|length %}
             {% for product in produce %}
-                {{ produce_card(product=product) }}
+                {{ produce_card(product=product,GW=GW) }}
             {% endfor %}
         {% else %}
             <h3 class="text--gray">

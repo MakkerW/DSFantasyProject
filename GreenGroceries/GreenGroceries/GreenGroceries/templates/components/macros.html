@@ -32,13 +32,13 @@
 
         <div class="form--row">
             <div class="form-group">
-                {{ form.first_name.label }}
-                {{ form.first_name }}
+                {{ form.full_name.label }}
+                {{ form.full_name }}
             </div>
 
             <div class="form-group">
-                {{ form. second_name.label }}
-                {{ form. second_name }}
+                {{ form. GW.label }}
+                {{ form. GW }}
             </div>
 
             <div class="form-group">
@@ -67,11 +67,12 @@
 {% endmacro %}
 
 
-{% macro produce_card (product=None, show_checkout=True, show_restock=False, date=None) %}
+{% macro produce_card (product=None, show_checkout=True, show_restock=False, date=None, GW=None) %}
+    {%if GW != 'none'%}
     <div class="card">
         <div class="card__info">
-            <p>First name: {{ product.first_name|format_data }}</p>
-            <p>Second name: {{ product.second_name|format_data }}</p>
+            <p>Name: {{ product.full_name|format_data }}</p>
+            <p>Gameweek: {{ product.gw |format_data }}</p>
             <p>FPL points: {{ product.total_points|format_data }}</p>
             <p>Goals scored: {{ product.goals_scored|format_data }}</p>
             <p>Assists : {{product.assists | format_data}}</p>
@@ -92,4 +93,31 @@
             {% endif %}
         </div>
     </div>
+    {%endif%}
+    {%if GW == 'none'%}
+    <div class="card">
+        <div class="card__info">
+            <p>Name: {{ product.full_name|format_data }}</p>
+            <p>FPL points: {{ product.all_points|format_data }}</p>
+            <p>Goals scored: {{ product.total_goals|format_data }}</p>
+            <p>Assists : {{product.total_assists | format_data}}</p>
+
+        </div>
+
+        <div class="card__action">
+            {% if show_checkout %}
+                {% if product.available %}
+                    <a href="{{ url_for('Produce.buy_produce', pk=product.produce_pk) }}">Buy</a>
+                {% endif %}
+            {% else %}
+                {% if show_restock %}
+                    {% if not product.available %}
+                        <a href="{{ url_for('Produce.restock_produce', pk=product.produce_pk) }}">Restock</a>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    {%endif%}
 {% endmacro %}
+

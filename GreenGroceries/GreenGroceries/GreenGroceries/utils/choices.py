@@ -4,12 +4,15 @@ import pandas as pd
 #from GreenGroceries import app
 
 #DATASET_PATH = os.path.join(app.root_path, 'dataset', 'fruitvegprices-2017_2022.csv')
-DATASET_PATH = "C:/Users/welin/Downloads/DSFantasyProject/GreenGroceries/GreenGroceries/GreenGroceries/dataset/cleaned_players.csv"
+DATASET_PATH = "C:/Users/welin/Downloads/DSFantasyProject/GreenGroceries/GreenGroceries/GreenGroceries/dataset/merged_gw.csv"
 
 
 
 class ModelChoices:
+    
     def __init__(self, choices_list):
+        choices_list = list(choices_list)  # Convert choices_list to a list if it's not already
+        choices_list.append('None')  # Add "none" as a choice
         for item in choices_list:
             item_str = str(item)  # Convert item to string
             item_str = item_str.replace("_", " ").capitalize()
@@ -25,10 +28,12 @@ class ModelChoices:
 
 
 df = pd.read_csv(DATASET_PATH, sep=',')
-
-ProduceCategoryChoices = ModelChoices(df.first_name)
-ProduceItemChoices = ModelChoices(df.second_name)
-ProduceVarietyChoices = ModelChoices(df.goals_scored)
-ProduceUnitChoices = ModelChoices(df.minutes)
+df.dropna(subset=['GW'], inplace=True)
+df['GW'] = df['GW'].astype(int)
+df['total_goals'] = df.groupby('name')['goals_scored'].transform('sum')
+df['all_points'] = df.groupby('name')['total_points'].transform('sum')
+df['total_assists'] = df.groupby('name')['assists'].transform('sum')
+GWChoices = ModelChoices(df.GW)
+PositionChoices = ModelChoices(df.position)
 UserTypeChoices = ModelChoices(['Farmer', 'Customer'])
 

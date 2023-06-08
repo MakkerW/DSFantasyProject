@@ -2,12 +2,10 @@ DROP TABLE IF EXISTS Produce CASCADE;
 
 CREATE TABLE IF NOT EXISTS Produce(
  pk serial UNIQUE NOT NULL PRIMARY KEY,
-    first_name VARCHAR(255),
-    second_name VARCHAR(255),
+    full_name VARCHAR(255),
     goals_scored INT,
     assists INT,
     total_points INT,
-    mins INT,
     goals_conceded INT,
     creativity DECIMAL(10, 2),
     influence DECIMAL(10, 2),
@@ -18,15 +16,18 @@ CREATE TABLE IF NOT EXISTS Produce(
     clean_sheets INT,
     red_cards INT,
     yellow_cards INT,
-    selected_by_percent DECIMAL(10, 2),
-    now_cost INT,
-    element_type VARCHAR(255)
+    position VARCHAR(255),
+    GW INT,
+    total_goals INT,
+    all_points INT,
+    total_assists INT,
+    team VARCHAR(255)
 );
 
 DELETE FROM Produce;
 
 CREATE INDEX IF NOT EXISTS produce_index
-ON Produce (first_name, second_name);
+ON Produce (full_name);
 
 DROP TABLE IF EXISTS Sell;
 
@@ -56,7 +57,14 @@ DELETE FROM ProduceOrder;
 
 CREATE OR REPLACE VIEW vw_produce
 AS
-SELECT p.first_name, p.second_name, p.total_points, p.goals_scored,
+SELECT p.full_name,p.GW, p.total_points, p.goals_scored,
        p.assists
 FROM Produce p
-ORDER BY p.first_name;
+ORDER BY p.total_points;
+
+CREATE OR REPLACE VIEW vw_total_produce
+AS
+SELECT p.full_name,p.all_points, p.total_goals, p.total_assists,
+       p.position
+FROM Produce p
+ORDER BY p.total_points;
